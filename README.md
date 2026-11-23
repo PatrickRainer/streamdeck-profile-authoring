@@ -47,7 +47,7 @@ python3 examples/iracing/build_iracing_profile.py iRacing.streamDeckProfile
 python3 streamdeck-profile-authoring/scripts/verify_profile.py iRacing.streamDeckProfile
 ```
 
-Edit the `PAGES` table to move keys around. Before you build, check the key choices in the script: the `[`/`]` codes are set for a Swiss-German keyboard, and the Ctrl+Shift / Ctrl+Alt F-key combos for actions iRacing leaves unbound have to be assigned in iRacing too.
+Edit the `PAGES` table to move keys around. Before you build, check the key choices in the script: FOV, horizon and seat height use Ctrl+Shift+1…6 (bind those in iRacing too), and the Ctrl+Shift / Ctrl+Alt F-key combos for actions iRacing leaves unbound have to be assigned in iRacing too.
 
 ## Status & caveats
 

@@ -250,9 +250,21 @@ per layout to physical positions, so the "same" VK is a different key on QWERTZ 
 AZERTY. Games that read DirectInput go by physical position. Example — the
 physical keys right of `P` are US `[` `]`, but on Swiss-German they are `ü`
 (`VK_OEM_1` = 186, Qt `Key_Udiaeresis` = 220, scan 26) and `¨` (`VK_OEM_3` = 192,
-Qt `Key_Diaeresis` = 168, scan 27). Ask about or infer the layout, label the key
-icon with the character the user actually sees, and tell them that re-recording
-the key in the Stream Deck app fixes it if it doesn't fire.
+Qt `Key_Diaeresis` = 168, scan 27).
+
+**Don't send punctuation keys from a generated profile at all.** In practice
+(iRacing, Swiss user, Stream Deck 7.5) keys built with guessed OEM codes for
+`[`/`]` silently did nothing while letter combos worked. Rebind those game
+actions to layout-proof combos instead — digits, F-keys, nav keys, letters other
+than Y/Z/A/Q/W/M (QWERTZ/AZERTY swaps) — e.g. `Ctrl+Shift+1…6`, and bind the
+same combo on both sides. If a punctuation key must stay, have the user record it
+in the Stream Deck app themselves.
+
+**After any change, cross-check every deck hotkey against the game's live
+bindings** (decode both into the same `(key, modifiers)` form and list the action
+each one hits). Also confirm that each mapped action isn't already bound to a
+wheel button in the *active* profile; a game action has only one key slot, so
+the deck key does nothing if the wheel owns it.
 
 ## Procedure — new bundle to import
 

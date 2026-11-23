@@ -1,4 +1,9 @@
-"""Generate iRacing.streamDeckProfile for Stream Deck MK.2 (5x3), Stream Deck 7.x (V3 layout).
+"""Generate iRacing.streamDeckProfile
+
+FOV / horizon / seat height use Ctrl+Shift+1..6: bind those in iRacing
+(DCamFOVInc/Dec, DCamVanishYInc/Dec, DCamDrvHeightInc/Dec). Other unbound actions
+use Ctrl+Shift+F-keys and Ctrl+Alt+F-keys; see the `NEW` markers in PAGES.
+ for Stream Deck MK.2 (5x3), Stream Deck 7.x (V3 layout).
 
 Run:  python3 build_iracing_profile.py [output.streamDeckProfile]
 Edit LAYOUT below to move keys; re-run to rebuild.
@@ -15,12 +20,11 @@ APP = "C:\\Program Files (x86)\\iRacing\\iRacingSim64DX11.exe"   # adjust to you
 def letter(c): return (ord(c), {'A':30,'B':48,'C':46,'D':32,'E':18,'F':33,'G':34,'H':35,'I':23,'J':36,'K':37,'L':38,'M':50,'N':49,'O':24,'P':25,'Q':16,'R':19,'S':31,'T':20,'U':22,'V':47,'W':17,'X':45,'Y':21,'Z':44}[c], ord(c))
 def fkey(n): return (111 + n, [59,60,61,62,63,64,65,66,67,68,87,88][n-1], 16777263 + n)
 KEYS = {
-    "I": letter("I"), "S": letter("S"), "W": letter("W"), "T": letter("T"), "M": letter("M"),
+    "I": letter("I"), "F": letter("F"), "P": letter("P"), "S": letter("S"), "W": letter("W"), "T": letter("T"), "M": letter("M"),
     "Y": letter("Y"), "Z": letter("Z"), "X": letter("X"), "L": letter("L"), "R": letter("R"),
     "A": letter("A"), "V": letter("V"),
     # iRacing defaults ] and [ sit on the physical keys right of P.
     # Swiss-German layout: those are ¨ (VK_OEM_3) and ü (VK_OEM_1).
-    # US layout: use "]": (221, 27, 93), "[": (219, 26, 91).
     "]": (192, 27, 168), "[": (186, 26, 220),
     "PGUP": (33, 73, 16777238), "PGDN": (34, 81, 16777239), "SPACE": (32, 57, 32),
 }
@@ -123,28 +127,28 @@ PAGES = {
   (1,0): ("hk", "Starter", "power", "car", "S", N(), None, None),
   (2,0): ("hk", "Wischer", "wiper", "car", "W", N(ctrl=True, alt=True), None, None),
   (3,0): ("hk", "Tear-Off", "visor", "car", "T", N(alt=True), None, None),
-  (4,0): ("hk", "Lichthupe", "light", "car", "F1", N(ctrl=True, shift=True), None, "HeadlightFlash"),
-  (0,1): ("hk", "FOV +", "fov", "view", "]", N(), "+", None),
-  (1,1): ("hk", "Sitz hoch", "seat", "view", "]", N(ctrl=True), "up", None),
+  (4,0): ("hk", "Auto-FFB", "wheel", "ffb", "A", N(ctrl=True), "A", None),
+  (0,1): ("hk", "FOV +", "fov", "view", "1", N(ctrl=True, shift=True), "+", None),
+  (1,1): ("hk", "Sitz hoch", "seat", "view", "5", N(ctrl=True, shift=True), "up", None),
   (2,1): ("hk", "FFB +", "wheel", "ffb", "F2", N(ctrl=True, shift=True), "+", "IncFFB"),
   (3,1): ("folder", "Endurance", "endurance", "endu"),
   (4,1): ("folder", "Ansicht", "view", "view"),
-  (0,2): ("hk", "FOV −", "fov", "view", "[", N(), "-", None),
-  (1,2): ("hk", "Sitz tief", "seat", "view", "[", N(ctrl=True), "down", None),
+  (0,2): ("hk", "FOV −", "fov", "view", "2", N(ctrl=True, shift=True), "-", None),
+  (1,2): ("hk", "Sitz tief", "seat", "view", "6", N(ctrl=True, shift=True), "down", None),
   (2,2): ("hk", "FFB −", "wheel", "ffb", "F3", N(ctrl=True, shift=True), "-", "DecFFB"),
   (3,2): ("folder", "Audio", "audio", "audio"),
   (4,2): ("folder", "HUD & Tools", "hud", "hud"),
  },
  "view": {
-  (1,0): ("hk", "Horizont ↑", "horizon", "view", "]", N(shift=True), "up", None),
+  (1,0): ("hk", "Horizont ↑", "horizon", "view", "3", N(ctrl=True, shift=True), "up", None),
   (2,0): ("hk", "Kamera ▶", "cam", "view", "PGUP", N(), "right", None),
   (3,0): ("hk", "Spiegel", "mirror", "view", "M", N(alt=True), None, None),
-  (4,0): ("hk", "Recenter", "recenter", "view", "Y", N(), None, None),
-  (0,1): ("hk", "Blick links", "look", "view", "Z", N(), "left", None),
-  (1,1): ("hk", "Horizont ↓", "horizon", "view", "[", N(shift=True), "down", None),
+  (4,0): ("hk", "FPS-Anzeige", "recenter", "view", "F", N(), None, None),
+  (0,1): ("hk", "Standings", "pit", "view", "F2", N(), None, None),
+  (1,1): ("hk", "Horizont ↓", "horizon", "view", "4", N(ctrl=True, shift=True), "down", None),
   (2,1): ("hk", "Kamera ◀", "cam", "view", "PGDN", N(), "left", None),
   (3,1): ("hk", "UI aus/an", "eyeoff", "view", "SPACE", N(), None, None),
-  (4,1): ("hk", "Blick rechts", "look", "view", "X", N(), "right", None),
+  (4,1): ("hk", "Relative", "pit", "view", "F3", N(), None, None),
   (3,2): ("hk", "UI grösser", "zoom", "view", "PGUP", N(ctrl=True), "+", None),
   (4,2): ("hk", "UI kleiner", "zoom", "view", "PGDN", N(ctrl=True), "-", None),
  },
@@ -181,11 +185,10 @@ PAGES = {
   (2,0): ("hk", "Radar", "radar", "hud", "R", N(shift=True, alt=True), None, None),
   (3,0): ("hk", "Pit-Info", "pit", "hud", "F7", N(ctrl=True, alt=True), None, "PitSummaryToggle"),
   (4,0): ("hk", "Marker", "marker", "hud", "M", N(), None, None),
-  (1,1): ("hk", "Low Fuel OK", "fuel", "hud", "F5", N(ctrl=True, alt=True), None, "LowFuelAccept"),
+  (1,1): ("hk", "Reifen-Info", "tire", "hud", "F6", N(), None, None),
   (2,1): ("hk", "Fuel bis Ende", "flag", "hud", "F6", N(ctrl=True, alt=True), None, "FuelToEndToggle"),
-  (3,1): ("hk", "Auto-FFB", "wheel", "ffb", "A", N(ctrl=True), "A", None),
+  (3,1): ("hk", "Pedal-Anzeige", "line", "hud", "P", N(), None, None),
   (1,2): ("hk", "Screenshot", "shot", "hud", "S", N(ctrl=True, shift=True, alt=True), None, None),
-  (2,2): ("hk", "Video", "video", "hud", "V", N(ctrl=True, shift=True, alt=True), None, None),
   (3,2): ("hk", "Lackierung", "paint", "hud", "R", N(ctrl=True), None, None),
  },
 }

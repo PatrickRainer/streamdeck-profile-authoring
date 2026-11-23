@@ -1,0 +1,3 @@
+*.streamDeckProfile
+__pycache__/
+*.pyc

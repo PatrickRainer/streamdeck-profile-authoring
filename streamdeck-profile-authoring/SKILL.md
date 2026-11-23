@@ -14,6 +14,7 @@ description: >
 license: MIT
 metadata:
   version: "1.2"
+  source: https://github.com/PatrickRainer/streamdeck-profile-authoring
 ---
 
 # Authoring Stream Deck profile bundles by hand
@@ -21,6 +22,10 @@ metadata:
 How to generate a `.streamDeckProfile` that imports cleanly **with its custom icons
 intact**, and how to update an already-installed profile without re-importing. The
 actions are the easy part; the icon referencing is what silently fails.
+
+Helper scripts (`verify_profile.py`, `iracing_controls.py`) and a full example
+generator live in https://github.com/PatrickRainer/streamdeck-profile-authoring —
+clone or fetch them if they aren't next to this file.
 
 **Failure pattern:** the profile imports, every key lands in the right slot with the
 right action, but the keys show the generic action glyph instead of the custom
@@ -177,6 +182,9 @@ Every key is one action object (V3 shape; drop `Plugin` and `Resources` for V2):
 }
 ```
 
+Use lowercase UUIDs inside JSON (ActionIDs, page UUIDs, `ProfileUUID`) — that's what
+Elgato emits.
+
 | Purpose | `UUID` | `Name` / `Plugin.Name` | `Settings` |
 |---|---|---|---|
 | Send a keystroke | `com.elgato.streamdeck.system.hotkey` | `Hotkey` / `Activate a Key Command` | see below |
@@ -290,7 +298,8 @@ keep the profile's identity.
 
 ### Verification pass (do this every time; it catches everything cheaply)
 
-`python3 scripts/verify_profile.py <file.streamDeckProfile>` asserts:
+`python3 scripts/verify_profile.py <file.streamDeckProfile>` (or the same checks by
+hand) asserts:
 
 - every `States[0].Image` matches `Images/<26 chars>Z.png` and exists in the zip
 - `ActionID`s are unique across the whole profile, and image filenames are unique
